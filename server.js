@@ -19,6 +19,7 @@ app.use(cors({ origin: true, credentials: true }));
 app.use("/uploads", express.static("uploads"));
 
 // Routes
+// dashboard api is not useabel
 app.use("/api/auth", authRoutes);
 app.use("/api/books", bookRoutes);
 app.use("/api/members", memberRoutes);
