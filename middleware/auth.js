@@ -3,7 +3,12 @@ import jwt from "jsonwebtoken";
 export default (roles = []) => {
   return (req, res, next) => {
 
-    const token = req.cookies.token || req.headers.authorization;
+    let token = req.cookies.token || req.headers.authorization;
+
+    // If token came in Authorization header as "Bearer <token>", strip the prefix
+    if (token && typeof token === "string" && token.startsWith("Bearer ")) {
+      token = token.split(" ")[1];
+    }
 
     if (!token) {
       return res.status(401).json({ message: "❌ No token found" });
